@@ -2,7 +2,7 @@
 Admin App boilerplate with a laravel api and angular front-end based on bootstrap. With this starter app you can manage your clients and projects, manage your project hours and digitally generate your invoices.
 
 - **Author:** Ruben Kuipers
-- **Website:** [http://rkmediadesign.nl](http://rkmediadesign.nl/)
+- **Author website:** [http://rkmediadesign.nl](http://rkmediadesign.nl/)
 - **Version:** 1.0.1
 
 ## Motivation
