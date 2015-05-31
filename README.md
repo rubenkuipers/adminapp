@@ -1,6 +1,8 @@
 # Laravel-Angular Adminapp
 Admin App boilerplate with a laravel api and angular front-end based on bootstrap. With this starter app you can manage your clients and projects, manage your project hours and digitally generate your invoices.
 
+![screenshot](https://github.com/kuiperr005/adminapp/blob/master/public/img/screenshot.png ""adminapp"")
+
 - **Author:** Ruben Kuipers
 - **Author website:** [http://rkmediadesign.nl](http://rkmediadesign.nl/)
 - **Version:** 1.0.1
