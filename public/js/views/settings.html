@@ -1,0 +1,175 @@
+<div class="col-md-12">
+	<div class="jumbotron" ng-hide="loading">
+		<h1>Settings</h1>
+		<p>Manage your company settings</p>
+	</div>
+	<!-- THE SETTINGS -->
+	<!-- hide these settings if the loading variable is true -->
+	<section class="settings" ng-hide="loading">
+		<form class="row" name="settingsForm" ng-submit="saveSettings(settingsForm.$valid)" ng-show="nodata" novalidate>
+			<!-- NAME -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.name.$invalid && !settingsForm.name.$pristine }">
+	        	<label for="name">Company name:</label>
+	            <input type="text" class="form-control input-lg" name="name" ng-model="settingsData.name" placeholder="Name" required>
+	            <p ng-show="settingsForm.name.$invalid && !settingsForm.name.$pristine" class="help-block">Name is required.</p>
+	        </div>
+
+	        <!-- ADRESS -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.adress.$invalid && !settingsForm.adress.$pristine }">
+	        	<label for="adress">Adress:</label>
+	            <input type="text" class="form-control input-lg" name="adress" ng-model="settingsData.adress" placeholder="Adress" required>
+	            <p ng-show="settingsForm.adress.$invalid && !settingsForm.adress.$pristine" class="help-block">Adress is required.</p>
+	        </div>
+
+			<!-- ZIPCODE -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.zipcode.$invalid && !settingsForm.zipcode.$pristine }">
+	        	<label for="zipcode">Zipcode:</label>
+	            <input type="text" class="form-control input-lg" name="zipcode" ng-model="settingsData.zipcode" placeholder="0000XX" ng-pattern="/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i" required>
+	            <p ng-show="settingsForm.zipcode.$invalid && !settingsForm.zipcode.$pristine" class="help-block">Zipcode is invalid.</p>
+	        </div>
+
+	        <!-- CITY -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.city.$invalid && !settingsForm.city.$pristine }">
+	        	<label for="city">City:</label>
+	            <input type="text" class="form-control input-lg" name="city" ng-model="settingsData.city" placeholder="City" required>
+	            <p ng-show="settingsForm.city.$invalid && !settingsForm.city.$pristine" class="help-block">City is required.</p>
+	        </div>
+
+	        <!-- WEBSITE -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.website.$invalid && !settingsForm.website.$pristine }">
+	        	<label for="website">Website:</label>
+	            <input type="url" class="form-control input-lg" name="website" ng-model="settingsData.website" placeholder="www.example.com" required>
+	            <p ng-show="settingsForm.website.$invalid && !settingsForm.website.$pristine" class="help-block">A valid website url is required.</p>
+	        </div>
+
+	        <!-- EMAIL -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.email.$invalid && !settingsForm.email.$pristine }">
+	        	<label for="email">Email:</label>
+	            <input type="email" class="form-control input-lg" name="email" ng-model="settingsData.email" placeholder="info@example.com" required>
+	            <p ng-show="settingsForm.email.$invalid && !settingsForm.email.$pristine" class="help-block">A valid email adress is required.</p>
+	        </div>
+
+	        <!-- PHONE -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.phone.$invalid && !settingsForm.phone.$pristine }">
+	        	<label for="phone">Phone:</label>
+	            <input type="string" class="form-control input-lg" name="phone" ng-model="settingsData.phone" value="settings[0].phone" placeholder="0657034658" ng-minlength="10" required>
+	            <p ng-show="settingsForm.phone.$invalid && !settingsForm.phone.$pristine" class="help-block">A valid phone number is required.</p>
+	        </div>
+
+	        <!-- BTW NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.btw_nr.$invalid && !settingsForm.btw_nr.$pristine }">
+	        	<label for="btw_nr">BTW number:</label>
+	            <input type="text" class="form-control input-lg" name="btw_nr" ng-model="settingsData.btw_nr" placeholder="NLXXXXXXXXXBXX" ng-minlength="14" ng-maxlength="14" required>
+	            <p ng-show="settingsForm.btw_nr.$invalid && !settingsForm.btw_nr.$pristine" class="help-block">A valid phone number is required.</p>
+	        </div>
+
+	        <!-- KVK NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.kvk_nr.$invalid && !settingsForm.kvk_nr.$pristine }">
+	        	<label for="kvk_nr">KVK number:</label>
+	            <input type="number" class="form-control input-lg" name="kvk_nr" ng-model="settingsData.kvk_nr" placeholder="XXXXXXXXX" ng-minlength="8" ng-maxlength="8" required>
+	            <p ng-show="settingsForm.kvk_nr.$invalid && !settingsForm.kvk_nr.$pristine" class="help-block">A valid kvk number is required.</p>
+	        </div>
+
+	        <!-- IBAN NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.iban.$invalid && !settingsForm.iban.$pristine }">
+	        	<label for="iban">IBAN:</label>
+	            <input type="text" class="form-control input-lg" name="iban" ng-model="settingsData.iban" placeholder="NLXXBANK0XXXXXXXXXX" ng-minlength="18" ng-maxlength="18" required>
+	            <p ng-show="settingsForm.iban.$invalid && !settingsForm.iban.$pristine" class="help-block">A valid IBAN number is required.</p>
+	        </div>
+
+	        <!-- BIC NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm.bic_nr.$invalid && !settingsForm.bic_nr.$pristine }">
+	        	<label for="bic_nr">BIC number:</label>
+	            <input type="text" class="form-control input-lg" name="bic_nr" ng-model="settingsData.bic_nr" placeholder="BANKNL2U" required>
+	            <p ng-show="settingsForm.bic_nr.$invalid && !settingsForm.bic_nr.$pristine" class="help-block">A valid BIC number is required.</p>
+	        </div>
+
+			<div class="form-group col-md-6">
+				<p><button type="submit" class="btn btn-primary btn-lg" ng-disabled="settingsForm.$invalid">Save</button></p>
+			</div>
+		</form>
+
+		<form class="row" name="settingsForm2" ng-submit="saveSettings(settingsForm2.$valid)" ng-hide="nodata" novalidate>
+			<!-- NAME -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.name.$invalid && !settingsForm2.name.$pristine }">
+	        	<label for="name">Company name:</label>
+	            <input type="text" class="form-control input-lg" name="name" ng-model="settings[0].name" value="settings[0].name" placeholder="Name" required>
+	            <p ng-show="settingsForm2.name.$invalid && !settingsForm2.name.$pristine" class="help-block">Name is required.</p>
+	        </div>
+
+	        <!-- ADRESS -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.adress.$invalid && !settingsForm2.adress.$pristine }">
+	        	<label for="adress">Adress:</label>
+	            <input type="text" value="settings[0].adress" class="form-control input-lg" name="adress" ng-model="settings[0].adress" placeholder="Adress" required>
+	            <p ng-show="settingsForm2.adress.$invalid && !settingsForm2.adress.$pristine" class="help-block">Adress is required.</p>
+	        </div>
+
+			<!-- ZIPCODE -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.zipcode.$invalid && !settingsForm2.zipcode.$pristine }">
+	        	<label for="zipcode">Zipcode:</label>
+	            <input type="text" value="settings[0].zipcode" class="form-control input-lg" name="zipcode" ng-model="settings[0].zipcode" placeholder="0000XX" ng-pattern="/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i" required>
+	            <p ng-show="settingsForm2.zipcode.$invalid && !settingsForm2.zipcode.$pristine" class="help-block">Zipcode is invalid.</p>
+	        </div>
+
+	        <!-- CITY -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.city.$invalid && !settingsForm2.city.$pristine }">
+	        	<label for="city">City:</label>
+	            <input type="text" value="settings[0].city" class="form-control input-lg" name="city" ng-model="settings[0].city" placeholder="City" required>
+	            <p ng-show="settingsForm2.city.$invalid && !settingsForm2.city.$pristine" class="help-block">City is required.</p>
+	        </div>
+
+	        <!-- WEBSITE -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.website.$invalid && !settingsForm2.website.$pristine }">
+	        	<label for="website">Website:</label>
+	            <input type="url" value="settings[0].website" class="form-control input-lg" name="website" ng-model="settings[0].website" placeholder="www.example.com" required>
+	            <p ng-show="settingsForm2.website.$invalid && !settingsForm2.website.$pristine" class="help-block">A valid website url is required.</p>
+	        </div>
+
+	        <!-- EMAIL -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.email.$invalid && !settingsForm2.email.$pristine }">
+	        	<label for="email">Email:</label>
+	            <input type="email" value="settings[0].email" class="form-control input-lg" name="email" ng-model="settings[0].email" placeholder="info@example.com" required>
+	            <p ng-show="settingsForm2.email.$invalid && !settingsForm2.email.$pristine" class="help-block">A valid email adress is required.</p>
+	        </div>
+
+	        <!-- PHONE -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.phone.$invalid && !settingsForm2.phone.$pristine }">
+	        	<label for="phone">Phone:</label>
+	            <input type="string" value="settings[0].phone" class="form-control input-lg" name="phone" ng-model="settings[0].phone" value="settings[0].phone" placeholder="0657034658" ng-minlength="10" required>
+	            <p ng-show="settingsForm2.phone.$invalid && !settingsForm2.phone.$pristine" class="help-block">A valid phone number is required.</p>
+	        </div>
+
+	        <!-- BTW NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.btw_nr.$invalid && !settingsForm2.btw_nr.$pristine }">
+	        	<label for="btw_nr">BTW number:</label>
+	            <input type="text" class="form-control input-lg" name="btw_nr" ng-model="settings[0].btw_nr" value="settings[0].btw_nr" placeholder="NLXXXXXXXXXBXX" ng-minlength="14" ng-maxlength="14" required>
+	            <p ng-show="settingsForm2.btw_nr.$invalid && !settingsForm2.btw_nr.$pristine" class="help-block">A valid BTW number is required.</p>
+	        </div>
+
+	        <!-- KVK NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.kvk_nr.$invalid && !settingsForm2.kvk_nr.$pristine }">
+	        	<label for="kvk_nr">KVK number:</label>
+	            <input type="text" class="form-control input-lg" name="kvk_nr" ng-model="settings[0].kvk_nr" value="settings[0].kvk_nr" placeholder="XXXXXXXXX" ng-minlength="8" ng-maxlength="8" required>
+	            <p ng-show="settingsForm2.kvk_nr.$invalid && !settingsForm2.kvk_nr.$pristine" class="help-block">A valid kvk number is required.</p>
+	        </div>
+
+	        <!-- IBAN NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.iban.$invalid && !settingsForm2.iban.$pristine }">
+	        	<label for="iban">IBAN:</label>
+	            <input type="text" class="form-control input-lg" name="iban" ng-model="settings[0].iban" value="settings[0].iban" placeholder="NLXXBANK0XXXXXXXXXX" ng-minlength="18" ng-maxlength="18" required>
+	            <p ng-show="settingsForm2.iban.$invalid && !settingsForm2.iban.$pristine" class="help-block">A valid IBAN number is required.</p>
+	        </div>
+
+	        <!-- BIC NR -->
+	        <div class="form-group col-md-6" ng-class="{ 'has-error' : settingsForm2.bic_nr.$invalid && !settingsForm2.bic_nr.$pristine }">
+	        	<label for="bic_nr">BIC number:</label>
+	            <input type="text" value="settings[0].bic_nr" class="form-control input-lg" name="bic_nr" ng-model="settings[0].bic_nr" placeholder="BANKNL2U" required>
+	            <p ng-show="settingsForm2.bic_nr.$invalid && !settingsForm2.bic_nr.$pristine" class="help-block">A valid BIC number is required.</p>
+	        </div>
+
+			<div class="form-group col-md-6">
+				<p><button type="submit" class="btn btn-primary btn-lg" ng-disabled="settingsForm2.$invalid">Save</button></p>
+			</div>
+		</form>
+	</section>
+</div>

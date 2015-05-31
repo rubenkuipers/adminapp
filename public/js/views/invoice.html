@@ -1,0 +1,115 @@
+<div class="col-md-12">
+
+	<!-- LOADING ICON -->
+	<!-- show loading icon if the loading variable is set to true -->
+	<p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+	<div class="row">
+		<div class="col-md-8 invoice-bg">
+			<section class="invoice-head">
+				<div class="row">
+					<div class="col-md-5">
+						<img src="http://placehold.it/200x125&text=Logo" title="Company logo" />
+					</div>
+					<div class="col-md-7">
+						<div ng-if="settings">
+							<p><strong>{{ settings.name }}</strong></p>
+							<div class="row">
+								<div class="col-md-6">
+									<p>{{ settings.adress }}</p>
+									<p>{{ settings.zipcode }} {{ settings.city }}</p>
+									<p><a href="mailto:{{ settings.email }}" title="{{ settings.email }}">{{ settings.email }}</a></p>
+									<p><a href="{{ settings.website }}">{{ settings.website }}</a></p>
+									<p>{{ settings.phone }}</p>
+								</div>
+								<div class="col-md-6">
+									<p>BTW nr: {{ settings.btw_nr }}</p>
+									<p>Kvk nr: {{ settings.kvk_nr }}</p>
+									<p>IBAN: {{ settings.iban }}</p>
+									<p>BIC: {{ settings.bic_nr }}</p>
+								</div>
+							</div>
+						</div>
+						<div ng-if="!settings">
+							<p><strong>You have not filled in your company details yet. Check the settings panel!</strong></p>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- THE INVOICE -->
+			<!-- hide these invoices if the loading variable is true -->
+			<section class="invoice-content" ng-hide="loading">
+				<div class="row">
+					<div class="col-md-12">
+						<p><strong><a href="/#clients/{{ invoice.client.id }}">{{ invoice.client.name }}</strong></a></p>
+						<p>{{ invoice.client.adress }}</p>
+						<p>{{ invoice.client.zipcode }} {{ invoice.client.city }}</p>
+
+						<h2>Invoice</h2>
+						<p><strong>Invoice date: {{ invoice.date }}</strong></p>
+						<p><strong>Invoice number: {{ invoice.number }}</strong></p>
+
+						<p><strong>Description:</strong> {{ invoice.description }}</p>
+					</div>
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<trow>
+										<th>Description</th>
+										<th>Date</th>
+										<th ng-if="invoice.project.price_method == 'hourly'">Hours</th>
+										<th>Price (without tax)</th>
+									</trow>
+								</thead>
+								<tbody>
+									<tr ng-if="invoice.project.price_method == 'hourly'" ng-repeat="task in invoice.project.tasklist.tasks">
+										<td>{{ task.description }}</td>
+										<td>{{ task.date }}</td>
+										<td>{{ task.hours }}</td>
+										<td>€ {{ task.price_exc_btw }}</td>
+									</tr>
+									<tr ng-if="invoice.project.price_method != 'hourly'">
+										<td>{{ invoice.description }}</td>
+										<td>{{ invoice.project.delivery_date }}</td>
+										<td>€ {{ invoice.price_exc_btw }}</td>
+									</tr>
+									<tr>
+										<td class="text-right" colspan="{{ invoice.project.price_method == 'hourly' ? '3' : '2' }}"><strong>Total Price (without tax)</strong></td>
+										<td>€ {{ invoice.price_exc_btw }}</td>
+									</tr>
+									<tr>
+										<td class="text-right" colspan="{{ invoice.project.price_method == 'hourly' ? '3' : '2' }}"><strong>Tax</strong></td>
+										<td>{{ invoice.project.sales_tax }}%</td>
+									</tr>
+									<tr>
+										<td class="text-right" colspan="{{ invoice.project.price_method == 'hourly' ? '3' : '2' }}"><strong>To pay</strong></td>
+										<td>€ {{ invoice.price_inc_btw }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<p><strong>We would kindly ask you to pay this invoice within 14 days on our bank account number above</strong></p>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-4">
+			<h3>Status</h3>
+			<p>
+			<toggle-switch
+			    ng-model="invoice.paid"
+			    ng-change="updateStatus(invoice.id)"
+			    knob-label="Paid"
+			    on-label="yes"
+				off-label="no">
+			</toggle-switch>
+			</p>
+			<!-- DOWNLOAD FUNCTIONALITY NEXT RELEASE -->
+			<!-- <p><button type="text" class="btn btn-primary btn-lg">Download</button></p> -->
+		</div>
+	</div>
+	
+</div>

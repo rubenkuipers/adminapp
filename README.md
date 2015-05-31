@@ -36,4 +36,5 @@ Contributions are welcome via Pull Requests on Github.
 
 ## License
 
+See [license file](https://github.com/kuiperr005/adminapp/LICENSE.md)
 

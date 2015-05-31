@@ -1,0 +1,45 @@
+<div class="col-md-12">
+
+	<!-- PAGE TITLE -->
+	<div class="jumbotron">
+		<h1>Invoices</h1>
+		<p>Manage your invoices</p>
+	</div>
+
+	<!-- LOADING ICON -->
+	<!-- show loading icon if the loading variable is set to true -->
+	<p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+	
+	<!-- THE CLIENTS -->
+	<!-- hide these clients if the loading variable is true -->
+	<section class="invoices" ng-hide="loading">
+		<div class="row invoice" ng-repeat="invoice in invoices">
+			<div class="col-md-3">
+				<p><strong><a href="/#invoices/{{ invoice.id }}">Invoice #{{ invoice.number }}</strong></a></p>
+				<p><strong>Invoice date:</strong> {{ invoice.date }} </p>
+				<p><strong>Client:</strong> <a href="/#clients/{{ invoice.client.id }}">{{ invoice.client.name }}</a></p> 
+				<toggle-switch
+				    ng-model="invoice.paid"
+				    ng-change="updateStatus(invoice.id)"
+				    knob-label="Paid"
+				    on-label="yes"
+   					off-label="no">
+				<toggle-switch>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Project</strong></p>
+				<p>{{ invoice.description }} </p>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Price Excl Btw</strong></p>
+				<p>€ {{ invoice.price_exc_btw }} </p>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Price Incl Btw</strong></p>
+				<p>€ {{ invoice.price_inc_btw }} </p>
+			</div>
+		</div>
+	</section>
+	
+
+</div>

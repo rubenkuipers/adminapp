@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Edit client: {{ client.name }}</h4>
+</div>
+<div class="modal-body">
+    <form name="updateClientForm" ng-submit="updateClient(updateClientForm.$valid)"> <!-- ng-submit will disable the default form action and use our function -->
+        <!-- NAME -->
+        <div class="form-group" ng-class="{ 'has-error' : updateClientForm.name.$invalid && !updateClientForm.name.$pristine }">
+            <input type="text" class="form-control input-lg" name="name" ng-model="client.name" value="client.name" placeholder="Name" required>
+            <p ng-show="updateClientForm.name.$invalid && !updateClientForm.name.$pristine" class="help-block">Name is required.</p>
+        </div>
+
+        <!-- ADRESS -->
+        <div class="form-group" ng-class="{ 'has-error' : updateClientForm.adress.$invalid && !updateClientForm.adress.$pristine }">
+            <input type="text" class="form-control input-lg" name="adress" ng-model="client.adress" value="client.adress" placeholder="Adress" required>
+            <p ng-show="updateClientForm.adress.$invalid && !updateClientForm.adress.$pristine" class="help-block">Adress is required.</p>
+        </div>
+
+        <!-- ZIPCODE -->
+        <div class="form-group" ng-class="{ 'has-error' : updateClientForm.zipcode.$invalid && !updateClientForm.zipcode.$pristine }">
+            <input type="text" class="form-control input-lg" name="zipcode" ng-model="client.zipcode" value="client.zipcode" placeholder="0000XX" ng-pattern="/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i" required>
+            <p ng-show="updateClientForm.zipcode.$invalid && !updateClientForm.zipcode.$pristine" class="help-block">A valid zipcode is required.</p>
+        </div>
+
+        <!-- CITY -->
+        <div class="form-group" ng-class="{ 'has-error' : updateClientForm.city.$invalid && !updateClientForm.city.$pristine }">
+            <input type="text" class="form-control input-lg" name="city" ng-model="client.city" value="client.city" placeholder="City" required>
+            <p ng-show="updateClientForm.city.$invalid && !updateClientForm.city.$pristine" class="help-block">City is required.</p>
+        </div>
+
+        <!-- WEBSITE -->
+        <div class="form-group" ng-class="{ 'has-error' : updateClientForm.website.$invalid && !updateClientForm.website.$pristine }">
+            <input type="url" class="form-control input-lg" name="website" ng-model="client.website" value="client.website" placeholder="www.example.com" required>
+            <p ng-show="updateClientForm.website.$invalid && !updateClientForm.website.$pristine" class="help-block">A valid website url is required.</p>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : updateClientForm.email.$invalid && !updateClientForm.email.$pristine }">
+            <input type="email" class="form-control input-lg" name="email" ng-model="client.email" value="client.email" placeholder="info@example.com" required>
+            <p ng-show="updateClientForm.email.$invalid && !updateClientForm.email.$pristine" class="help-block">A valid email adress is required.</p>
+        </div>
+
+        <!-- PHONE -->
+        <div class="form-group" ng-class="{ 'has-error' : updateClientForm.phone.$invalid && !updateClientForm.phone.$pristine }">
+            <input type="text" class="form-control input-lg" name="phone" ng-model="client.phone" value="client.phone" placeholder="065703465" ng-minlength="10" ng-maxlength="10" required>
+            <p ng-show="updateClientForm.phone.$invalid && !updateClientForm.phone.$pristine" class="help-block">A valid phone number is required.</p>
+        </div>
+        
+        <!-- SUBMIT BUTTON -->
+        <div class="form-group text-right"> 
+            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="updateClientForm.$invalid">Save</button>
+        </div>
+    </form>
+    <button class="btn btn-default btn-lg" ng-click="closeModal()" aria-label="Close">Cancel</button>
+    <!-- LOADING ICON -->
+    <!-- show loading icon if the loading variable is set to true -->
+    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+</div>

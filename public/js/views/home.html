@@ -1,0 +1,59 @@
+<div class="col-md-12">
+
+	<!-- PAGE TITLE -->
+	<div class="jumbotron">
+		<h1>{{ homeData }}</h1>
+		<p>Your personal client system</p>
+		<p><a class="btn btn-primary btn-lg" href="#clients" role="button">View your clients</a></p>
+	</div>
+
+	<!-- LOADING ICON -->
+	<!-- show loading icon if the loading variable is set to true -->
+	<p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+
+	<section class="dashboard" ng-hide="loading">
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Projects in progress</h3>
+				<div ng-if="!projects">
+					<p>There are no projects in progress yet.</p>
+				</div>
+				<div class="row dashboard-item" ng-repeat="project in projects | filter:{finished:0} | orderBy:'delivery_date'">
+					<div class="col-md-6">
+						<p><strong>Description</strong></p>
+						<p><a href="/#projects/{{ project.id }}"> {{ project.description }}</a></p>
+					</div>
+					<div class="col-md-3">
+						<p><strong>Delivery date</strong></p>
+						<p> {{ project.delivery_date }}</p>
+					</div>
+					<div class="col-md-3">
+						<p><strong>Spent hours</strong></p>
+						<p> {{ project.total_hours }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<h3>Unpaid invoices</h3>
+				<div ng-if="!invoices">
+					<p>There are no projects in progress yet.</p>
+				</div>
+				<div class="row dashboard-item" ng-repeat="invoice in invoices | orderBy:'date'">
+					<div class="col-md-3">
+						<p><strong>Invoice number</strong></p>
+						<p><a href="/#invoices/{{ invoice.id }}"> #{{ invoice.number }} </a></p>
+					</div>
+					<div class="col-md-6">
+						<p><strong>Client</strong></p>
+						<p><a href="/#clients/{{ invoice.client.id }}"> {{ invoice.client.name }} </a></p>
+					</div>
+					<div class="col-md-3">
+						<p><strong>Invoice date</strong></p>
+						<p> {{ invoice.date }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</div>

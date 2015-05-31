@@ -1,0 +1,70 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Edit project: {{ project.description }}</h4>
+</div>
+<div class="modal-body">
+    <form ng-submit="updateProject()"> <!-- ng-submit will disable the default form action and use our function -->
+        <!-- DESCRIPTION -->
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" name="description" ng-model="project.description" value="project.description" placeholder="Description">
+        </div>
+
+        <!-- CATEGORY -->
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select class="form-control" name="category" id="category" ng-model="project.category_id" ng-options="category as category.name for category in categories track by category.id">
+
+            </select>
+        </div>
+
+        <!-- CLIENT -->
+        <div class="form-group">
+            <label for="client">Client:</label>
+            <select class="form-control" name="client" id="client" ng-model="project.client_id" ng-options="client as client.name for client in clients track by client.id">
+
+            </select>
+        </div>
+
+        <!-- DELIVERY DATE -->
+        <div class="form-group">
+            <label for="delivery_date">Delivery date:</label>
+            <input type="date" class="form-control" id="delivery_date" ng-model="project.delivery_date" ng-required="false" value="project.delivery_date" placeholder="YYYY-MM-DD" />
+        </div>
+        
+        <!-- PRICE -->
+        <div class="form-group">
+            <label for="delivery_date">Price:</label>
+            <div class="input-group">
+                <span class="input-group-addon">€</span>
+                <input type="number" class="form-control" id="price" name="price" ng-model="project.price" value="project.price" placeholder="30">
+            </div>
+        </div>
+
+        <!-- SALES TAX -->
+        <div class="form-group">
+            <label for="sales_tax">Sales tax:</label>
+            <div class="input-group">
+                <input class="form-control" name="sales_tax" type="number" id="sales_tax" ng-model="project.sales_tax" value="project.sales_tax" />
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+
+        <!-- PRICE METHOD -->
+        <div class="form-group">
+            <label for="delivery_date">Price method:</label>
+            <select class="form-control" name="price_method" id="price_method" ng-model="project.price_method">
+                <option value="hourly">Hourly</option>
+                <option value="solid">Solid</option>
+            </select>
+        </div>
+        
+        <!-- SUBMIT BUTTON -->
+        <div class="form-group text-right">
+            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+        </div>
+    </form>
+    <button class="btn btn-default btn-lg" ng-click="closeModal()" aria-label="Close">Cancel</button> 
+    <!-- LOADING ICON -->
+    <!-- show loading icon if the loading variable is set to true -->
+    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+</div>

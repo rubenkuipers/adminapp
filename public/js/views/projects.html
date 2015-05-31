@@ -1,0 +1,56 @@
+<div class="col-md-12">
+
+	<!-- PAGE TITLE -->
+	<div class="jumbotron">
+		<h1>Projects</h1>
+		<p>Manage your projects</p>
+		<p><button type="button" class="btn btn-primary btn-lg" ng-click="submitProject()">Add new</button></p>
+	</div>
+
+	<!-- LOADING ICON -->
+	<!-- show loading icon if the loading variable is set to true -->
+	<p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+	
+	<!-- THE CLIENTS -->
+	<!-- hide these clients if the loading variable is true -->
+	<section class="projects" ng-hide="loading">
+		<div class="row project" ng-repeat="project in projects">
+			<div class="col-md-3">
+				<p><strong>Description</strong></p>
+				<p><strong><a href="#/projects/{{ project.id }}">{{ project.description }}</a></strong></p>
+				<p><strong>Client:</strong> <a href="/#clients/{{ project.client.id }}">{{ project.client.name }}</a></p> 
+				<p><strong>Category:</strong> {{ project.category.name }}</p>
+				<p><strong>Delivery date:</strong> {{ project.delivery_date }} </p>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Pricing</strong></p>
+				<p><strong>Price:</strong> € {{ project.price }} </p>
+				<p><strong>Price method:</strong> {{ project.price_method }}</p>
+				<p><strong>Sales tax:</strong> {{ project.sales_tax }}%</p>
+				<p><strong>Total price (incl taxes):</strong> € {{ project.total_price }}</p>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Invoice</strong></p>
+				<div ng-if="project.invoice.id">
+					<p><a href="#/invoices/{{ project.invoice.id }}">Invoice #{{ project.invoice.number }}</a></p>
+				</div>
+				<div ng-if="!project.invoice.id">
+					<p>not generated</p>
+				</div>	
+				
+				<!-- <p><a class="btn btn-primary btn-sm" href="#/invoices/{{ project.invoice.id }}" role="button">Invoice {{ project.invoice.number }}</a></p> -->
+			</div>
+			<div class="col-md-3">
+				<p><strong>Status</strong></p>
+				<toggle-switch
+				    ng-model="project.finished"
+				    ng-change="updateStatus(project.id)"
+				    knob-label="Done"
+				    on-label="yes"
+   					off-label="no">
+				<toggle-switch>
+			</div>
+		</div>
+	</section>
+
+</div>

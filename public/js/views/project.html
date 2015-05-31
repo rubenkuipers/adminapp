@@ -1,0 +1,152 @@
+<div class="col-md-12">
+
+	<!-- PAGE TITLE -->
+	<div class="jumbotron" ng-hide="loading">
+		<h1>{{ project.description }}</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<p>Category: {{ project.category.name }}</p>
+				<p>Client: <a href="#/clients/{{ project.client.id }}" title="{{ project.client.name }}">{{ project.client.name }}</a></p>
+				<p>Delivery date: {{ project.delivery_date }} </p>
+				<toggle-switch
+				    ng-model="project.finished"
+				    ng-change="updateStatus()"
+				    knob-label="Done"
+				    on-label="yes"
+   					off-label="no">
+				</toggle-switch>
+			</div>
+			<div class="col-md-6">
+				<p>Price: € {{ project.price }} </p>
+				<p>Sales tax: {{ project.sales_tax }}% </p>
+				<p>Price method: {{ project.price_method }}</p>
+				<p>Total price (incl taxes): € {{ project.total_price }}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary btn-lg" ng-click="editProject()">Edit project</button> 
+				<button type="button" class="btn btn-lg" ng-click="deleteProject()">Delete project</button>
+			</div>
+			<div class="col-md-6">
+				<div ng-if="project.invoice.id">
+					<p><a class="btn btn-primary btn-lg" href="#/invoices/{{ project.invoice.id }}" role="button">View invoice</a></p>
+				</div>
+				<div ng-if="!project.invoice.id">
+					<p><button type="button" class="btn btn-primary btn-lg" ng-click="generateInvoice()">Generate invoice</button></p>
+				</div>		
+			</div>
+		</div>
+	</div>
+
+	<!-- LOADING ICON -->
+	<!-- show loading icon if the loading variable is set to true -->
+	<p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+	
+	<!-- THE CLIENTS -->
+	<!-- hide these clients if the loading variable is true -->
+	<section class="tasks" ng-hide="loading">
+		<h2>Tasks</h2>
+		<div ng-if="project.tasklist.tasks" id="project.tasklist.id">
+			<div class="row task" ng-repeat="task in project.tasklist.tasks">
+				<div ng-hide="editing == true">
+					<div class="col-md-3">
+						<p><strong>Description</strong></p>
+						<p>{{ task.description }}</p>
+					</div>
+					<div class="col-md-2">
+						<p><strong>Date</strong></p>
+						<p>{{ task.date }} </p>
+					</div>
+					<div class="col-md-2">
+						<p><strong>Hours</strong></p>
+						<p>{{ task.hours }}</p>
+					</div>
+					<div class="col-md-2">
+						<p><strong>Price exc btw</strong></p>
+						<div ng-if="project.price_method == 'hourly'">
+							<p>€ {{ task.price_exc_btw }}</p>
+						</div>
+						<div ng-if="project.price_method != 'hourly'">
+							<p>n.v.t.</p>
+						</div>
+					</div>
+				</div>
+				<div ng-show="editing == true">
+					<div class="col-md-3">
+						<p><strong>Description</strong></p>
+						<p><textarea type="text" class="form-control" id="description" name="description" ng-model="task.description" placeholder="description"></textarea></p>
+					</div>
+					<div class="col-md-2">
+						<p><strong>Date</strong></p>
+						<p><input type="date" class="form-control" id="date" name="date" ng-model="task.date" placeholder=""></p>
+					</div>
+					<div class="col-md-2">
+						<p><strong>Hours</strong></p>
+						<p><input type="number" class="form-control" id="hours" name="hours" ng-model="task.hours" placeholder="2"></p>
+					</div>
+					<div class="col-md-2">
+						<p><strong>Price exc btw</strong></p>
+						<div ng-if="project.price_method == 'hourly'">
+							<p>€ {{ task.price_exc_btw }}</p>
+						</div>
+						<div ng-if="project.price_method != 'hourly'">
+							<p>n.v.t.</p>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-3">
+					<p><strong>Actions</strong></p>
+					<p>
+						<button type="button" class="btn btn-primary btn-sm" ng-hide="editing" ng-click="editing = true">Edit</button>
+						<button type="submit" class="btn btn-primary btn-sm" ng-show="editing" ng-click="updateTask(task.id); editing = false">Save</button>  
+						<button type="button" class="btn btn-default btn-sm" ng-click="deleteTask(task.id)">Delete</button>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div ng-if="!project.tasklist.tasks.length" ng-hide="showform">
+			<div class="row task">
+				<div class="col-md-12">
+					<p><strong>There are no tasks yet for this project</strong></p>
+					<p>You can create a task below</p>
+				</div>
+			</div>
+		</div>
+		<form class="row task" ng-show="showform" ng-submit="submitTask()">
+			<div class="col-md-3 form-group">
+				<label for="description"><strong>Description:</strong></label>
+				<textarea type="text" class="form-control" id="description" name="description" ng-model="taskData.description" placeholder="description"></textarea>
+			</div>
+			<div class="col-md-2 form-group">
+				<label for="date"><strong>Date:</strong></label>
+				<p><input type="date" class="form-control" id="date" name="date" ng-model="taskData.date" placeholder="YYYY-MM-DD"></p>
+			</div>
+			<div class="col-md-2 form-group">
+				<label for="hours"><strong>Hours:</strong></label>
+				<p><input type="number" class="form-control" id="hours" name="hours" ng-model="taskData.hours" placeholder="2"></p>
+			</div>
+			<div class="col-md-2 form-group">
+				<p><strong>Price exc btw</strong></p>
+				<div ng-if="project.price_method == 'hourly'">
+					<p>€ {{ taskData.price_exc_btw }}</p>
+				</div>
+				<div ng-if="project.price_method != 'hourly'">
+					<p>n.v.t.</p>
+				</div>
+			</div>
+			<div class="col-md-3 form-group">
+				<p><button type="submit" class="btn btn-primary btn-md">Save</button></p>
+			</div>
+		</form>
+	</section>
+	<section class="project_actions">
+		<div class="row">
+			<div class="col-md-12">
+				<p><button type="button" class="btn btn-primary btn-lg {{ showform ? 'disabled' : '' }}" ng-click="addTask()">Add task</button><button type="text" class="btn btn-default btn-lg" ng-show="showform" ng-click="closeForm()">Cancel</button></p>
+			</div>
+		</div>
+	</section>
+
+</div>

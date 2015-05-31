@@ -1,0 +1,28 @@
+<div class="col-md-12">
+
+	<!-- PAGE TITLE -->
+	<div class="jumbotron">
+		<h1>Clients</h1>
+		<p>Manage your clients</p>
+		<p><button type="button" class="btn btn-primary btn-lg" ng-click="submitClient()">Add new</button></p>
+	</div>
+
+	<!-- LOADING ICON -->
+	<!-- show loading icon if the loading variable is set to true -->
+	<p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+	
+	<!-- THE CLIENTS -->
+	<!-- hide these clients if the loading variable is true -->
+	<div class="row clients">
+		<div class="client col-sm-2 col-md-4 col-lg-3" ng-hide="loading" ng-repeat="client in clients">
+			<div class="thumbnail">
+				<div class="caption">
+					<h3><a href="#/clients/{{ client.id }}">{{ client.name }}</a></h3>
+					<p><a href="{{client.website}}" target="_blank" title="Ga naar de website"> {{ client.website }}</a></p>
+					<p><a href="mailto:{{client.email}}" title="{{client.email"> {{ client.email }}</a></p>
+					<p>{{ client.phone }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

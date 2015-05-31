@@ -1,0 +1,53 @@
+<div class="col-md-12">
+	
+	<!-- LOADING ICON -->
+	<!-- show loading icon if the loading variable is set to true -->
+	<p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+
+	<!-- PAGE TITLE -->
+	<div class="jumbotron" ng-hide="loading">
+		<h1>{{ client.name }}</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<p>{{ client.adress }}</p>
+				<p>{{ client.zipcode }}</p>
+				<p>{{ client.city }}</p>
+			</div>
+			<div class="col-md-6">
+				<p><a href="http://{{ client.website }}"> {{client.website }} </a></p>
+				<p><a href="mailto:{{client.email }}"> {{ client.email }}</a></p>
+				<p>{{ client.phone }}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<button type="button" class="btn btn-primary btn-lg" ng-click="updateClient()">Edit client</button> 
+				<button type="button" class="btn btn-lg" ng-click="deleteClient()">Delete client</button>	
+			</div>
+		</div>
+	</div>
+
+	<section class="client_projects" ng-if="client.projects">
+		<h2>Projects</h2>
+		<div class="row project" ng-repeat="project in client.projects">
+			<div class="col-md-3">
+				<p><strong>Description</strong></p>
+				<p><a href="#/projects/{{ project.id }}">{{ project.description }}</a></p>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Category</strong></p>
+				<p>{{ project.category.name }}</p>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Delivery date</strong></p>
+				<p>{{ project.delivery_date }}</p>
+			</div>
+			<div class="col-md-3">
+				<p><strong>Status</strong></p>
+				<p ng-if="project.finished == true">Done</p>
+				<p ng-if="project.finished == false">In progress</p>
+			</div>
+		</div>
+	</section>
+
+</div>

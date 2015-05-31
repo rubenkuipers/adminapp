@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">{{ title }}</h4>
+</div>
+<div class="modal-body">
+    <form name="submitProjectForm" ng-submit="submitProject(submitProjectForm.$valid)" novalidate> <!-- ng-submit will disable the default form action and use our function -->
+        <!-- DESCRIPTION -->
+        <div class="form-group" ng-class="{ 'has-error' : submitProjectForm.description.$invalid && !submitProjectForm.description.$pristine }">
+            <input type="text" class="form-control input-lg" name="description" ng-model="projectData.description" placeholder="Description" required>
+            <p ng-show="submitProjectForm.description.$invalid && !submitProjectForm.description.$pristine" class="help-block">Description is required.</p>
+        </div>
+
+        <!-- CATEGORY -->
+        <div class="form-group" ng-class="{ 'has-error' : submitProjectForm.category.$invalid && !submitProjectForm.category.$pristine }">
+            <label for="category">Category:</label>
+            <select class="form-control" name="category" id="category" ng-model="projectData.category_id" ng-options="category as category.name for category in categories track by category.id" required>
+            </select>
+            <p ng-show="submitProjectForm.category.$invalid && !submitProjectForm.category.$pristine" class="help-block">Category is required.</p>
+        </div>
+
+        <!-- CLIENT -->
+        <div class="form-group" ng-class="{ 'has-error' : submitProjectForm.client.$invalid && !submitProjectForm.client.$pristine }">
+            <label for="client">Client:</label>
+            <select class="form-control" name="client" id="client" ng-model="projectData.client_id" ng-options="client as client.name for client in clients track by client.id">
+            </select>
+            <p ng-show="submitProjectForm.client.$invalid && !submitProjectForm.client.$pristine" class="help-block">Client is required.</p>
+        </div>
+
+        <!-- DELIVERY DATE -->
+        <div class="form-group" ng-class="{ 'has-error' : submitProjectForm.delivery_date.$invalid && !submitProjectForm.delivery_date.$pristine }">
+            <label for="delivery_date">Delivery date:</label>
+            <input type="date" name="delivery_date" class="form-control" id="delivery_date" ng-model="projectData.delivery_date" placeholder="YYYY-MM-DD" required />
+            <p ng-show="submitProjectForm.delivery_date.$invalid && !submitProjectForm.delivery_date.$pristine" class="help-block">Delivery date is required.</p>
+        </div>
+        
+        <!-- PRICE -->
+        <div class="form-group" ng-class="{ 'has-error' : submitProjectForm.price.$invalid && !submitProjectForm.price.$pristine }">
+            <label for="price">Price:</label>
+            <div class="input-group">
+                <span class="input-group-addon">€</span>
+                <input type="number" class="form-control" id="price" name="price" ng-model="projectData.price" placeholder="30" required>
+            </div>
+            <p ng-show="submitProjectForm.price.$invalid && !submitProjectForm.price.$pristine" class="help-block">Price is required.</p>
+        </div>
+
+        <!-- SALES TAX -->
+        <div class="form-group" ng-class="{ 'has-error' : submitProjectForm.sales_tax.$invalid && !submitProjectForm.sales_tax.$pristine }">
+            <label for="sales_tax">Sales tax:</label>
+            <div class="input-group">
+                <input class="form-control" name="sales_tax" type="number" id="sales_tax" ng-model="projectData.sales_tax" min="0" max="21" required />
+                <span class="input-group-addon">%</span>
+            </div>
+            <p ng-show="submitProjectForm.sales_tax.$invalid && !submitProjectForm.sales_tax.$pristine" class="help-block">Sales tax is required.</p>
+        </div>
+
+        <!-- PRICE METHOD -->
+        <div class="form-group" ng-class="{ 'has-error' : submitProjectForm.price_method.$invalid && !submitProjectForm.price_method.$pristine }">
+            <label for="price_method">Price method:</label>
+            <select class="form-control" name="price_method" id="price_method" ng-model="projectData.price_method" required>
+                <option selected="selected" value="hourly">Hourly</option>
+                <option value="solid">Solid</option>
+            </select>
+            <p ng-show="submitProjectForm.price_method.$invalid && !submitProjectForm.price_method.$pristine" class="help-block">Price method is required.</p>
+        </div>
+        
+        <!-- SUBMIT BUTTON -->
+        <div class="form-group text-right">
+            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="submitProjectForm.$invalid">Submit</button>
+        </div>
+    </form>
+    <button class="btn btn-default btn-lg" ng-click="closeModal()" aria-label="Close">Cancel</button> 
+    <!-- LOADING ICON -->
+    <!-- show loading icon if the loading variable is set to true -->
+    <p class="text-center" ng-show="loading"><span class="fa fa-spinner fa-spin"></span></p>
+</div>
