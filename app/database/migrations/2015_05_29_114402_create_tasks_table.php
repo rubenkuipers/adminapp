@@ -17,9 +17,10 @@ class CreateTasksTable extends Migration {
 		    $table->integer('tasklist_id')
 		    	->unsigned()
 		    	->nullable();
-		    $table->foreign('tasklist_id')
-      			->references('id')->on('tasklists')
-      			->onDelete('cascade');
+		    // $table->foreign('tasklist_id')
+      // 			->references('id')->on('tasklists')
+      // 			->onDelete('cascade');
+      		$table->longText('description');
 		    $table->date('date');
 		    $table->integer('hours');
 		    $table->decimal('price_exc_btw',10,2);

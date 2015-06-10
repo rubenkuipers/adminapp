@@ -17,9 +17,9 @@ class CreateInvoicesTable extends Migration {
 		    $table->integer('client_id')
 		    	->unsigned()
 		    	->nullable();
-		    $table->foreign('client_id')
-      			->references('id')->on('clients')
-      			->onDelete('cascade');
+		    // $table->foreign('client_id')
+      // 			->references('id')->on('clients')
+      // 			->onDelete('cascade');
 		    $table->date('date');
 		    $table->integer('number');
 		    $table->longText('description');
@@ -29,9 +29,9 @@ class CreateInvoicesTable extends Migration {
 		    $table->integer('project_id')
 		    	->unsigned()
 		    	->nullable();
-		    $table->foreign('project_id')
-      			->references('id')->on('projects')
-      			->onDelete('cascade');
+		    // $table->foreign('project_id')
+      // 			->references('id')->on('projects')
+      // 			->onDelete('cascade');
       		$table->timestamps();
 		});
 	}
