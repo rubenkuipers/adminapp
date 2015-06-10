@@ -39,6 +39,10 @@
 				<p>€ {{ invoice.price_inc_btw }} </p>
 			</div>
 		</div>
+		<div ng-show="!invoices.length" class="col-md-12">
+			<h3>No invoices</h3>
+			<p>You have no invoices yet.</p>
+		</div>
 	</section>
 	
 

@@ -16,7 +16,7 @@
 			<div class="col-md-6">
 				<h3>Projects in progress</h3>
 				<div ng-if="!projects">
-					<p>There are no projects in progress yet.</p>
+					<p>There are no projects yet, create one first!</p>
 				</div>
 				<div class="row dashboard-item" ng-repeat="project in projects | filter:{finished:0} | orderBy:'delivery_date'">
 					<div class="col-md-6">
@@ -32,15 +32,18 @@
 						<p> {{ project.total_hours }}</p>
 					</div>
 				</div>
+				<div ng-show="(projects | filter:{finished:0}).length == 0">
+			      	<p>There are no projects in progress yet.</p>
+			    </div>
 			</div>
 			<div class="col-md-6">
 				<h3>Unpaid invoices</h3>
 				<div ng-if="!invoices">
-					<p>There are no projects in progress yet.</p>
+					<p>There are no invoices yet.</p>
 				</div>
-				<div class="row dashboard-item" ng-repeat="invoice in invoices | orderBy:'date'">
+				<div class="row dashboard-item" ng-repeat="invoice in invoices | filter:{paid:0} | orderBy:'date'">
 					<div class="col-md-3">
-						<p><strong>Invoice number</strong></p>
+						<p><strong>Invoice</strong></p>
 						<p><a href="/#invoices/{{ invoice.id }}"> #{{ invoice.number }} </a></p>
 					</div>
 					<div class="col-md-6">
@@ -52,6 +55,9 @@
 						<p> {{ invoice.date }}</p>
 					</div>
 				</div>
+				<div ng-show="(invoices | filter:{paid:0}).length == 0">
+			      	<p>There are no unpaid invoices yet.</p>
+			    </div>
 			</div>
 		</div>
 	</section>
