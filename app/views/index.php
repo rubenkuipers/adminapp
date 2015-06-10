@@ -6,11 +6,11 @@
 
 	<!-- CSS -->
 
-	<link rel="stylesheet" href="js/vendor/bootstrap.min.css"> 
+	<!-- <link rel="stylesheet" href="js/vendor/bootstrap.min.css">  -->
 	<!-- <link rel="stylesheet" href="js/vendor/font-awesome.min.css">  -->
 
 
-	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">  -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	
 
@@ -30,12 +30,12 @@
 	</style>
 
 	<!-- JS -->
-	<!--
+	
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> 
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.js"></script>
-	-->
-	<script src="js/vendor/angular.min.js"></script> 
-	<script src="js/vendor/angular-route.js"></script>
+	
+	<!-- <script src="js/vendor/angular.min.js"></script>  -->
+	<!-- <script src="js/vendor/angular-route.js"></script> -->
 	<script src="js/vendor/ui-bootstrap-tpls-0.12.1.js"></script>
 	<script src="js/vendor/angular-toggle-switch.min.js"></script>
 
