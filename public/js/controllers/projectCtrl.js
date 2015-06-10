@@ -294,6 +294,12 @@ angular.module('projectCtrl', [])
 						$scope.taskData.tasklist_id = tasklist_id;
 						$scope.project.tasklist_id = tasklist_id;
 
+						if($scope.project.price_method == 'hourly') {
+							$scope.taskData.price_exc_btw = $scope.taskData.hours * $scope.project.price;
+						} else {
+							$scope.taskData.price_exc_btw = 0.00;
+						}
+						console.log($scope.taskData);
 						// set category and client id of current project
 						$scope.project.category_id = selectedCategory.id;
 						$scope.project.client_id = selectedClient.id;
