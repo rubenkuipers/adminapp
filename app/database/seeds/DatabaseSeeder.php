@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder {
 		// $this->call('TasklistTableSeeder');
 		// $this->command->info('Tasklist table seeded.');
 
-		$this->call('ProjectTableSeeder');
-		$this->command->info('Project table seeded.');
+		$this->call('CategoryTableSeeder');
+		$this->command->info('Categories table seeded.');
 
 		// $this->call('InvoiceTableSeeder');
 		// $this->command->info('Invoice table seeded.');
